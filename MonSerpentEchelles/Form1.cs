@@ -16,38 +16,18 @@ namespace MonSerpentEchelles
         public Form1()
         {
             InitializeComponent();
-            InitialiserCases();
-            InitialiserPions();
-            InitialiserDe();
+            InitialiserTableau();
             InitialiserFenetre();
         }
 
-        public void InitialiserCases()
+        // Crée un tableau de jeu et l'affiche à l'écran
+        public void InitialiserTableau()
         {
-            for (int i = 0; i < 16; ++i)
-            {
-                Case c = new Case(this);
-            }
-
-            Case.Renverser();
-            Case.Zigzaguer();
+            Tableau t = new Tableau();
+            t.Initialiser(this);
         }
 
-        public void InitialiserPions()
-        {
-            for (int i = 0; i < 4; ++i)
-            {
-                Pion j = new Pion(this);
-            }
-
-            Pion.Pions[0].Activer();
-        }
-
-        public void InitialiserDe()
-        {
-            De d = new De(this);
-        }
-
+        // Configure la fenêtre selon la taille du tableau
         public void InitialiserFenetre()
         {
             Width = 240 + 60 * Case.NbColonnes;

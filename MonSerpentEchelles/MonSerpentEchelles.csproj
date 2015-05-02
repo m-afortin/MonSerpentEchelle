@@ -44,8 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arbitre.cs" />
-    <Compile Include="Controlable.cs" />
+    <Compile Include="Tableau.cs" />
     <Compile Include="De.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -9,8 +9,17 @@ using System.Windows.Forms;
 
 namespace MonSerpentEchelles
 {
-    public class De : Controlable
+    public class De : Tableau
     {
+        // Nombre de cases instanciées
+        public static int NbTotal = 0;
+
+        // Identifiant unique de la case
+        public int Id;
+
+        // Bouton représentant la case
+        public Button Bouton;
+
         // Taille du bouton en pixels
         private readonly int Taille = 120;
 
@@ -19,17 +28,14 @@ namespace MonSerpentEchelles
 
         public De(Form form)
         {
+            Initialiser();
+            Decorer();
             Positionner();
             Montrer(form);
             NbTotal++;
         }
 
-        public override void Ajouter()
-        {
-            Des.Add(this);
-        }
-
-        public override void Initialiser()
+        public void Initialiser()
         {
             Id = NbTotal;
             Bouton = new Button();
@@ -37,7 +43,7 @@ namespace MonSerpentEchelles
         }
 
         // Configure l'apparence du dé
-        public override void Decorer()
+        public void Decorer()
         {
             Bouton.Text = "Dé";
             Bouton.Width = Taille;
@@ -45,14 +51,14 @@ namespace MonSerpentEchelles
         }
 
         // Affiche le dé à l'écran
-        public override void Montrer(Form form)
+        public void Montrer(Form form)
         {
             form.Controls.Add(Bouton);
         }
 
         // Calcule la position du dé
         // selon le nombre de cases
-        public override void Positionner()
+        public void Positionner()
         {
             Bouton.Left = Taille / 2 + Case.NbColonnes * Case.Taille;
             Bouton.Top = Taille / 2;
@@ -60,21 +66,21 @@ namespace MonSerpentEchelles
         }
 
         // Permet de cliquer sur le dé
-        public override void Activer()
+        public void Activer()
         {
             Bouton.Enabled = true;
             Bouton.Click += new EventHandler(De_Click);
         }
 
         // Empêche de cliquer sur le dé
-        public override void Desactiver()
+        public void Desactiver()
         {
             Bouton.Enabled = false;
             Bouton.Click -= new EventHandler(De_Click);
         }
 
         // Obtient un nombre au hasard entre 1 et 6
-        private void Lancer()
+        public void Lancer()
         {
             Resultat = new Random().Next(1, 7);
             Bouton.Text = Resultat.ToString();
@@ -93,7 +99,6 @@ namespace MonSerpentEchelles
         }
 
         // Exécute les actions du dé ci-haut
-        // et donne le relais à "l'arbitre"
         private void De_Click(Object sender, EventArgs e)
         {
             Desactiver();
